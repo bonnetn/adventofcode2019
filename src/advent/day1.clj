@@ -2,7 +2,24 @@
 
 (require '[clojure.string :as str])
 
-(defn day1 [inputData]
-  (def input (map read-string (str/split inputData #"\n")))
-  (reduce + (map #(- (quot % 3) 2) input))
+(defn getFuel [mass]
+  (- (quot mass 3) 2)
+)
+
+(defn getFuelForModules [modules]
+  (reduce + (map getFuel modules))
+)
+
+(defn getFuelForFuel [fuelMass]
+  (def fuel (getFuel fuelMass))
+  (if (<= fuel 0) 
+    0
+    (+ fuel (getFuelForFuel fuel))
+  )
+)
+
+(defn day1 [modules]
+  (def fuelForModules (getFuelForModules modules))
+  (def fuelForFuel (reduce + (map getFuelForFuel (map getFuel modules))))
+  (+ fuelForModules fuelForFuel)
 )
