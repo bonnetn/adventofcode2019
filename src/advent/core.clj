@@ -9,8 +9,5 @@
                                 (slurp d)
                                 (str/split d #",")
                                 (map read-string d)
-                                (vec d)
-                                (assoc d
-                                       1 12
-                                       2 2))]
+                                (vec d))]
              (day2/day2 day2Data))))
