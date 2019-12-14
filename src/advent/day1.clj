@@ -3,23 +3,21 @@
 (require '[clojure.string :as str])
 
 (defn getFuel [mass]
-  (- (quot mass 3) 2)
-  )
+  (- (quot mass 3) 2))
 
 (defn getFuelForModules [modules]
-  (reduce + (map getFuel modules))
-  )
+  (reduce + (map getFuel modules)))
 
 (defn getFuelForFuel [fuelMass]
-  (if (<= fuelMass 0) 
-    0
-    (getFuelForFuel fuelMass)
-    )
-  )
+  (let [fuel (getFuel fuelMass)]
+    (if (<= fuel 0)
+      0
+      (+ fuel (getFuelForFuel fuel)))))
 
 (defn day1 [modules]
   (let [fuelForModules (getFuelForModules modules)
-        fuelForFuel (reduce + (map getFuelForFuel (map getFuel modules))) ]
+        fuelForFuel (reduce + (map (comp getFuelForFuel getFuel) modules))]
     (+ fuelForModules fuelForFuel)
     )
   )
+

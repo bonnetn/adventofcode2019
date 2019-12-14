@@ -9,6 +9,21 @@
   (str/split d #","))
 
 (defn -main []
+  ; DAY1
+  (let [inputData (map read-string (str/split (slurp "input/chall1.txt") #"\n"))]
+    (println (day1/day1 inputData)) )
+
+  ; DAY2
+  (let [day2Data (as-> "input/chall2.txt" d
+                       (slurp d)
+                       (str/split d #",")
+                       (map read-string d)
+                       (vec d)
+                       (assoc d
+                         1 12
+                         2 2))]
+    (println (day2/day2 day2Data)))
+
   ; DAY3
   (let [[path1, path2] (as-> "input/chall3.txt" d
                              (slurp d)
