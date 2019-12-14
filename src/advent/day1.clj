@@ -4,22 +4,22 @@
 
 (defn getFuel [mass]
   (- (quot mass 3) 2)
-)
+  )
 
 (defn getFuelForModules [modules]
   (reduce + (map getFuel modules))
-)
+  )
 
 (defn getFuelForFuel [fuelMass]
-  (let fuel (getFuel fuelMass))
-  (if (<= fuel 0) 
+  (if (<= fuelMass 0) 
     0
-    (+ fuel (getFuelForFuel fuel))
+    (getFuelForFuel fuelMass)
+    )
   )
-)
 
 (defn day1 [modules]
-  (let fuelForModules (getFuelForModules modules))
-  (let fuelForFuel (reduce + (map getFuelForFuel (map getFuel modules))))
-  (+ fuelForModules fuelForFuel)
-)
+  (let [fuelForModules (getFuelForModules modules)
+        fuelForFuel (reduce + (map getFuelForFuel (map getFuel modules))) ]
+    (+ fuelForModules fuelForFuel)
+    )
+  )

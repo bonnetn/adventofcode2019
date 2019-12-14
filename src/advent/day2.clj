@@ -8,9 +8,9 @@
 
 (defn run-opcode-instruction [opcode memory instruction-pointer]
   (if (= opcode 99) [memory (count memory)]
-      (instruction (case opcode
-                     1 +
-                     2 *) memory instruction-pointer)))
+                    (instruction (case opcode
+                                   1 +
+                                   2 *) memory instruction-pointer)))
 
 (defn compute [memory]
   (loop [memory memory
@@ -32,3 +32,4 @@
         (if (>= v 9999)
           nil
           (recur (inc v)))))))
+
